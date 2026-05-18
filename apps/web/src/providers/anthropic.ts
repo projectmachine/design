@@ -1,5 +1,6 @@
 import type { AppConfig, ChatMessage } from '../types';
 import { isOpenAICompatible } from './openai-compatible';
+import { streamThaura } from './thaura';
 
 export { isOpenAICompatible } from './openai-compatible';
 
@@ -14,11 +15,11 @@ export function makeClient(_cfg: AppConfig): never {
 }
 
 export async function streamMessage(
-  _cfg: AppConfig,
-  _system: string,
-  _history: ChatMessage[],
-  _signal: AbortSignal,
+  cfg: AppConfig,
+  system: string,
+  history: ChatMessage[],
+  signal: AbortSignal,
   handlers: StreamHandlers,
 ): Promise<void> {
-  handlers.onError(new Error('AI chat generation is not available in this web-only fork.'));
+  return streamThaura(cfg, system, history, signal, handlers);
 }

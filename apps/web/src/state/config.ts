@@ -1,6 +1,7 @@
 import type { AppConfigPrefs } from '@open-design/contracts';
 import { MEDIA_PROVIDERS } from '../media/models';
 import { isOpenAICompatible } from '../providers/openai-compatible';
+import { THAURA_FORCED_CONFIG } from '../lib/thaura';
 import type {
   ApiProtocol,
   AppConfig,
@@ -363,10 +364,12 @@ export function loadConfig(): AppConfig {
       merged.configMigrationVersion = CONFIG_MIGRATION_VERSION;
     }
 
+    Object.assign(merged, THAURA_FORCED_CONFIG);
     return merged;
   } catch {
     return {
       ...DEFAULT_CONFIG,
+      ...THAURA_FORCED_CONFIG,
       pet: normalizePet(DEFAULT_PET),
       notifications: normalizeNotifications(DEFAULT_NOTIFICATIONS),
       orbit: normalizeOrbit(DEFAULT_ORBIT),

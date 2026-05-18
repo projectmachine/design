@@ -164,6 +164,77 @@ function catalogStubs(app: express.Express): void {
   app.post('/api/provider/models', (_req, res) => res.json({ models: [] }));
   app.post('/api/runs', (_req, res) => apiError(res, 410, 'REMOVED', 'agent runs are not available in this web-only fork'));
   app.get('/api/runs', (_req, res) => res.json({ runs: [] }));
+  app.post('/api/proxy/thaura/stream', asyncRoute(async (req, res) => {
+    const apiKey = process.env.THAURA_API_KEY ?? '';
+    if (!apiKey) {
+      res.status(500).json({ error: 'THAURA_API_KEY environment variable is not set' });
+      return;
+    }
+    const body = safeBodyObject(req);
+    const model = typeof body.model === 'string' ? body.model : 'thaura';
+    const systemPrompt = typeof body.systemPrompt === 'string' ? body.systemPrompt : '';
+    const messages = Array.isArray(body.messages) ? body.messages as Array<{ role: string; content: string }> : [];
+    const maxTokens = typeof body.maxTokens === 'number' ? body.maxTokens : 8192;
+
+    const chatMessages: Array<{ role: string; content: string }> = [];
+    if (systemPrompt) chatMessages.push({ role: 'system', content: systemPrompt });
+    chatMessages.push(...messages);
+
+    let upstream: Awaited<ReturnType<typeof fetch>>;
+    try {
+      upstream = await fetch('https://backend.thaura.ai/v1/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+        body: JSON.stringify({ model, messages: chatMessages, max_tokens: maxTokens, stream: true }),
+      });
+    } catch (err) {
+      res.status(502).json({ error: String(err) });
+      return;
+    }
+
+    if (!upstream.ok || !upstream.body) {
+      const text = await upstream.text().catch(() => '');
+      res.setHeader('Content-Type', 'text/event-stream');
+      res.write(`event: error\ndata: ${JSON.stringify({ message: `upstream ${upstream.status}: ${text}` })}\n\n`);
+      res.end();
+      return;
+    }
+
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+
+    const reader = upstream.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+    try {
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buf += decoder.decode(value, { stream: true });
+        const lines = buf.split('\n');
+        buf = lines.pop() ?? '';
+        for (const line of lines) {
+          const trimmed = line.trim();
+          if (!trimmed.startsWith('data: ')) continue;
+          const data = trimmed.slice(6);
+          if (data === '[DONE]') {
+            res.write(`event: end\ndata: {}\n\n`);
+            res.end();
+            return;
+          }
+          try {
+            const chunk = JSON.parse(data) as { choices?: Array<{ delta?: { content?: string } }> };
+            const content = chunk.choices?.[0]?.delta?.content;
+            if (content) res.write(`event: delta\ndata: ${JSON.stringify({ delta: content })}\n\n`);
+          } catch { /* skip malformed chunks */ }
+        }
+      }
+    } catch (err) {
+      if (!res.writableEnded) res.write(`event: error\ndata: ${JSON.stringify({ message: String(err) })}\n\n`);
+    }
+    if (!res.writableEnded) { res.write(`event: end\ndata: {}\n\n`); res.end(); }
+  }));
   app.post('/api/proxy/:provider/stream', (_req, res) => apiError(res, 410, 'REMOVED', 'LLM proxy routes are not available'));
 }
 

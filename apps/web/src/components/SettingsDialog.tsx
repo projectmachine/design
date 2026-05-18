@@ -662,7 +662,7 @@ export function SettingsDialog({
   daemonLive,
   appVersionInfo,
   welcome,
-  initialSection = 'execution',
+  initialSection = 'about',
   onPersist,
   onPersistComposioKey,
   composioConfigLoading = false,
@@ -1579,17 +1579,7 @@ export function SettingsDialog({
 
         <div className="modal-body">
           <aside className="settings-sidebar" aria-label="Settings sections">
-            <button
-              type="button"
-              className={`settings-nav-item${activeSection === 'execution' ? ' active' : ''}`}
-              onClick={() => setActiveSection('execution')}
-            >
-              <Icon name="sliders" size={18} />
-              <span>
-                <strong>{t('settings.envConfigure')}</strong>
-                <small>{`${t('settings.localCli')} / ${t('settings.modeApiMeta')}`}</small>
-              </span>
-            </button>
+            {/* execution section hidden: provider is hardcoded to Thaura */}
             <button
               type="button"
               className={`settings-nav-item${activeSection === 'memory' ? ' active' : ''}`}
