@@ -10,9 +10,8 @@ services:
     environment:
       NODE_ENV: production
       NODE_OPTIONS: ${NODE_OPTIONS:---max-old-space-size=192}
-      SERVICE_FQDN_OPENDESIGN_7456: ''
       OD_BIND_HOST: 0.0.0.0
-      OD_ALLOWED_ORIGINS: ${SERVICE_URL_OPENDESIGN:-}
+      OD_ALLOWED_ORIGINS: ${SERVICE_URL_OPEN_DESIGN:-}
       OD_PORT: 7456
       OD_WEB_PORT: 7456
       OD_DAEMON_DB: ${OD_DAEMON_DB:-postgres}
