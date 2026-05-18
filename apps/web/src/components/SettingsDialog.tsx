@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { REPO_LATEST_RELEASE_API_URL, REPO_RELEASES_URL } from '../lib/repo';
 import type { CSSProperties, Dispatch, SetStateAction } from 'react';
 import { validateBaseUrl } from '@open-design/contracts/api/connectionTest';
 import {
@@ -740,7 +741,7 @@ export function SettingsDialog({
     if (versionChecking || !appVersionInfo) return;
     setVersionChecking(true);
     try {
-      const res = await fetch('https://api.github.com/repos/nexu-io/open-design/releases/latest', {
+      const res = await fetch(REPO_LATEST_RELEASE_API_URL, {
         headers: { Accept: 'application/vnd.github+json' },
       });
       if (res.ok) {
@@ -756,7 +757,7 @@ export function SettingsDialog({
     } finally {
       setVersionChecking(false);
     }
-    window.open('https://github.com/nexu-io/open-design/releases', '_blank', 'noopener,noreferrer');
+    window.open(REPO_RELEASES_URL, '_blank', 'noopener,noreferrer');
   }, [versionChecking, appVersionInfo, t]);
 
   // Imperative handle for the External MCP section. The dialog footer Save

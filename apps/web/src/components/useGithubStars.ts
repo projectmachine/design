@@ -6,9 +6,8 @@
 // back silently — UI still renders a placeholder count.
 
 import { useEffect, useState } from 'react';
+import { REPO_API_URL, REPO_URL } from '../lib/repo';
 
-const API = 'https://api.github.com/repos/projectmachine/design';
-const REPO = 'https://github.com/projectmachine/design';
 const LS_KEY = 'open-design:gh-stars';
 
 // One-hour soft cache — long enough to dodge GitHub's 60/hr
@@ -52,7 +51,7 @@ export function formatStars(count: number): string {
   return `${(count / 1000).toFixed(1).replace(/\.0$/, '')}K`;
 }
 
-export const GITHUB_REPO_URL = REPO;
+export const GITHUB_REPO_URL = REPO_URL;
 
 export function useGithubStars(): number | null {
   const [count, setCount] = useState<number | null>(() => {
@@ -73,7 +72,7 @@ export function useGithubStars(): number | null {
     const ctrl = new AbortController();
     (async () => {
       try {
-        const res = await fetch(API, {
+        const res = await fetch(REPO_API_URL, {
           headers: { Accept: 'application/vnd.github+json' },
           signal: ctrl.signal,
         });

@@ -1,12 +1,6 @@
 import { useT } from '../i18n';
 import { Icon } from './Icon';
-
-/**
- * Canonical location of the full privacy policy. Kept as a single named
- * constant so it can be repointed (e.g. to a hosted page) without touching
- * markup. `PRIVACY.md` documents the same data handling the modal discloses.
- */
-const PRIVACY_POLICY_URL = 'https://github.com/nexu-io/open-design/blob/main/PRIVACY.md';
+import { REPO_PRIVACY_URL } from '../lib/repo';
 
 interface Props {
   /** Affirmative consent (Share usage data). */
@@ -63,7 +57,7 @@ export function PrivacyConsentModal({ onShare, onDecline }: Props): JSX.Element 
 
       <a
         className="privacy-consent-policy-link"
-        href={PRIVACY_POLICY_URL}
+        href={REPO_PRIVACY_URL}
         target="_blank"
         rel="noopener noreferrer"
       >

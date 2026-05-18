@@ -49,8 +49,10 @@ export interface PluginSourceLinks {
   contributeOnGithub: boolean;
 }
 
-const OPEN_DESIGN_REPO_URL = 'https://github.com/nexu-io/open-design';
-const OPEN_DESIGN_REPO_LABEL = 'nexu-io/open-design';
+import { REPO_SLUG, REPO_URL } from '../lib/repo';
+
+const OPEN_DESIGN_REPO_URL = REPO_URL;
+const OPEN_DESIGN_REPO_LABEL = REPO_SLUG;
 
 const GITHUB_SOURCE_RE = /^github:([A-Za-z0-9._-]+)\/([A-Za-z0-9._-]+)(?:@([A-Za-z0-9._/-]+))?(?:\/(.+))?$/;
 const GITHUB_PROFILE_RE = /^https?:\/\/(?:www\.)?github\.com\/([A-Za-z0-9](?:[A-Za-z0-9-]{0,38}[A-Za-z0-9])?)(?:[\/?#].*)?$/;

@@ -13,12 +13,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Icon } from './Icon';
 import { useT } from '../i18n';
-
-const REPO = 'https://github.com/projectmachine/design';
-const ISSUES_URL = `${REPO}/issues/new`;
-const PRS_URL = `${REPO}/pulls`;
-const RELEASES_URL = `${REPO}/releases`;
-const LATEST_RELEASE_URL = `${REPO}/releases/latest`;
+import { REPO_ISSUES_URL, REPO_LATEST_RELEASE_URL, REPO_PRS_URL } from '../lib/repo';
 
 const ext = { target: '_blank', rel: 'noreferrer noopener' } as const;
 
@@ -66,7 +61,7 @@ export function EntryHelpMenu() {
         >
           <a
             className="entry-help-popover__item"
-            href={ISSUES_URL}
+            href={REPO_ISSUES_URL}
             {...ext}
             role="menuitem"
             onClick={() => setOpen(false)}
@@ -78,7 +73,7 @@ export function EntryHelpMenu() {
           </a>
           <a
             className="entry-help-popover__item"
-            href={PRS_URL}
+            href={REPO_PRS_URL}
             {...ext}
             role="menuitem"
             onClick={() => setOpen(false)}
@@ -90,7 +85,7 @@ export function EntryHelpMenu() {
           </a>
           <a
             className="entry-help-popover__item"
-            href={LATEST_RELEASE_URL}
+            href={REPO_LATEST_RELEASE_URL}
             {...ext}
             role="menuitem"
             onClick={() => setOpen(false)}
@@ -99,19 +94,6 @@ export function EntryHelpMenu() {
               <Icon name="bell" size={14} />
             </span>
             <span>{t('entry.helpWhatsNew')}</span>
-          </a>
-          <div className="entry-help-popover__divider" aria-hidden />
-          <a
-            className="entry-help-popover__item"
-            href={RELEASES_URL}
-            {...ext}
-            role="menuitem"
-            onClick={() => setOpen(false)}
-          >
-            <span className="entry-help-popover__icon" aria-hidden>
-              <Icon name="download" size={14} />
-            </span>
-            <span>{t('entry.helpDownloadDesktop')}</span>
           </a>
         </div>
       ) : null}
