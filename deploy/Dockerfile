@@ -32,7 +32,7 @@ COPY apps/daemon/package.json ./apps/daemon/package.json
 COPY apps/web/package.json ./apps/web/package.json
 RUN corepack enable && \
     corepack prepare pnpm@10.33.2 --activate && \
-    pnpm install --package-import-method=copy
+    pnpm install
 
 COPY apps ./apps
 RUN pnpm --filter @open-design/db build && \
