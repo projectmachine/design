@@ -71,14 +71,13 @@ export async function getAnalyticsClient(
         // opt_out_capturing() — see applyConsent() below and
         // AnalyticsProvider's setConsent wiring in App.tsx.
         autocapture: true,
-        capture_pageview: 'history_change',
-        capture_pageleave: 'if_capture_pageview',
+        capture_pageview: true,
+        capture_pageleave: true,
         capture_dead_clicks: true,
         capture_performance: {
           web_vitals: true,
           network_timing: true,
         },
-        capture_exceptions: true,
 
         // --- Privacy defenses -----------------------------------------
         // 1. scrub.ts runs on every outgoing event and strips $el_text

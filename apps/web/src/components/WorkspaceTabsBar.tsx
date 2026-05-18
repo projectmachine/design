@@ -89,6 +89,9 @@ function tabFromRoute(route: Route, timestamp = Date.now()): WorkspaceChromeTab 
       lastActiveAt: timestamp,
     };
   }
+  if (route.kind === 'login' || route.kind === 'signup') {
+    return createEntryTab('home', timestamp);
+  }
   return createEntryTab(route.view, timestamp);
 }
 

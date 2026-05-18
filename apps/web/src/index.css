@@ -1,5 +1,106 @@
 @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap');
 
+/* Auth */
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  background: var(--bg-app);
+  color: var(--text);
+}
+
+.auth-card {
+  width: min(420px, 100%);
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: var(--bg-panel);
+  box-shadow: 0 24px 70px rgb(13 12 10 / 10%);
+}
+
+.auth-card h1 {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.auth-eyebrow,
+.auth-copy,
+.auth-error,
+.auth-success {
+  margin: 0;
+}
+
+.auth-eyebrow {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.auth-copy {
+  color: var(--text-muted);
+}
+
+.auth-card label {
+  display: grid;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.auth-card input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: var(--bg-elevated);
+  color: var(--text);
+  font: inherit;
+}
+
+.auth-card button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: var(--accent);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 200ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.auth-card button:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
+
+.auth-card button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.auth-card .auth-secondary {
+  border: 1px solid var(--border);
+  background: var(--bg-subtle);
+  color: var(--text);
+}
+
+.auth-error {
+  color: var(--red, #b42318);
+  font-size: 13px;
+}
+
+.auth-success {
+  color: var(--green);
+  font-size: 13px;
+}
+
 /* ============================================================
    Open Design — neutral product workspace
    ============================================================ */

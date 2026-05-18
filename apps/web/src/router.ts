@@ -18,6 +18,8 @@ export type EntryHomeView =
   | 'integrations';
 
 export type Route =
+  | { kind: 'login' }
+  | { kind: 'signup' }
   | { kind: 'home'; view: EntryHomeView }
   | {
       kind: 'project';
@@ -38,6 +40,8 @@ export type Route =
 export function parseRoute(pathname: string): Route {
   const parts = pathname.replace(/\/+$/, '').split('/').filter(Boolean);
   if (parts.length === 0) return { kind: 'home', view: 'home' };
+  if (parts[0] === 'login') return { kind: 'login' };
+  if (parts[0] === 'signup') return { kind: 'signup' };
   if (parts[0] === 'projects') {
     if (parts[1]) {
       const projectId = decodeURIComponent(parts[1]);
@@ -94,6 +98,8 @@ export function parseRoute(pathname: string): Route {
 }
 
 export function buildPath(route: Route): string {
+  if (route.kind === 'login') return '/login';
+  if (route.kind === 'signup') return '/signup';
   if (route.kind === 'home') {
     if (route.view === 'projects') return '/projects';
     if (route.view === 'tasks') return '/automations';

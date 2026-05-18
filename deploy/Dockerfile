@@ -24,16 +24,15 @@ WORKDIR /app
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY scripts/postinstall.mjs ./scripts/postinstall.mjs
 COPY packages ./packages
-COPY tools ./tools
 COPY apps/daemon/package.json ./apps/daemon/package.json
 COPY apps/web/package.json ./apps/web/package.json
-COPY e2e/package.json ./e2e/package.json
 RUN corepack enable && \
     corepack prepare pnpm@10.33.2 --activate && \
-    pnpm install --frozen-lockfile
+    pnpm install --frozen-lockfile --package-import-method=copy
 
 COPY apps ./apps
-RUN pnpm --filter @open-design/daemon build && \
+RUN pnpm --filter @open-design/db build && \
+    pnpm --filter @open-design/daemon build && \
     pnpm --filter @open-design/web build && \
     pnpm --filter @open-design/daemon deploy --legacy --prod /app/deploy/daemon && \
     pnpm store prune && \
@@ -44,49 +43,17 @@ RUN pnpm --filter @open-design/daemon build && \
       /app/deploy/daemon/node_modules/@types \
       /app/deploy/daemon/node_modules/.pnpm/@types+* \
       /app/deploy/daemon/node_modules/.pnpm/better-sqlite3@*/node_modules/better-sqlite3/deps \
-      /app/deploy/daemon/node_modules/.pnpm/better-sqlite3@*/node_modules/better-sqlite3/src && \
-    find /app/deploy/daemon/node_modules -type d \( \
-      -name test -o \
-      -name tests -o \
-      -name "__tests__" -o \
-      -name docs -o \
-      -name doc -o \
-      -name example -o \
-      -name examples -o \
-      -name ".github" \
-    \) -prune -exec rm -rf '{}' + && \
-    find /app/deploy/daemon/node_modules -type f \( \
-      -name "*.md" -o \
-      -name "*.markdown" -o \
-      -name "*.d.ts" -o \
-      -name "*.d.cts" -o \
-      -name "*.d.mts" -o \
-      -name "*.map" -o \
-      -name "*.tsbuildinfo" -o \
-      -name "binding.gyp" \
-    \) -delete
+      /app/deploy/daemon/node_modules/.pnpm/better-sqlite3@*/node_modules/better-sqlite3/src
 
 FROM ${RUNTIME_IMAGE}
 
-RUN apk add --no-cache tini poppler-utils && \
+RUN apk add --no-cache tini && \
     addgroup -S -g 1001 open-design && \
     adduser -S -D -H -u 1001 -G open-design open-design
 
 WORKDIR /app
 COPY --from=build --chown=open-design:open-design /app/deploy/daemon ./apps/daemon
 COPY --from=build --chown=open-design:open-design /app/apps/web/out ./apps/web/out
-COPY --chown=open-design:open-design skills ./skills
-COPY --chown=open-design:open-design design-systems ./design-systems
-COPY --chown=open-design:open-design craft ./craft
-COPY --chown=open-design:open-design prompt-templates ./prompt-templates
-COPY --chown=open-design:open-design assets/frames ./assets/frames
-COPY --chown=open-design:open-design assets/community-pets ./assets/community-pets
-# Plan §3.J4 / spec §23.3.5 — bundled atom plugins registered on
-# daemon boot. The directory contains `plugins/_official/atoms/<atom>/`
-# pairs (SKILL.md + open-design.json); registerBundledPlugins() walks
-# it on startup so the container ships with first-party atoms reachable
-# via the same registry path third-party plugins use.
-COPY --chown=open-design:open-design plugins/_official ./plugins/_official
 
 RUN mkdir -p /app/.od && \
     chown -R open-design:open-design /app
