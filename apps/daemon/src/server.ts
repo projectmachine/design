@@ -62,7 +62,7 @@ const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 50 
 const defaultStore = (): Store => ({ projects: [], conversations: [], messages: {}, tabs: {}, templates: [], comments: {} });
 
 function projectRoot(): string {
-  return path.resolve(fileURLToPath(new URL('../../../..', import.meta.url)));
+  return path.resolve(fileURLToPath(new URL('../../..', import.meta.url)));
 }
 
 function dataDir(root = projectRoot()): string {
