@@ -7,8 +7,8 @@
 
 import { useEffect, useState } from 'react';
 
-const API = 'https://api.github.com/repos/nexu-io/open-design';
-const REPO = 'https://github.com/nexu-io/open-design';
+const API = 'https://api.github.com/repos/projectmachine/design';
+const REPO = 'https://github.com/projectmachine/design';
 const LS_KEY = 'open-design:gh-stars';
 
 // One-hour soft cache — long enough to dodge GitHub's 60/hr

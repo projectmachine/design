@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-19T00:00:00Z",
+  "title": "Design System: Open Design",
+  "extensions": {
+    "colorMeta": {
+      "fired-clay": {
+        "role": "primary",
+        "displayName": "Fired Clay",
+        "canonical": "#c96442",
+        "tonalRamp": ["#3d1508", "#6b2814", "#953c24", "#b45a3b", "#c96442", "#d97a56", "#f5d8cb", "#fbeee5"]
+      },
+      "fired-clay-deep": {
+        "role": "primary",
+        "displayName": "Fired Clay Deep",
+        "canonical": "#b45a3b",
+        "tonalRamp": ["#3d1508", "#6b2814", "#953c24", "#b45a3b", "#c96442", "#d97a56", "#f5d8cb", "#fbeee5"]
+      },
+      "fired-clay-soft": {
+        "role": "primary",
+        "displayName": "Fired Clay Soft",
+        "canonical": "#f5d8cb",
+        "tonalRamp": ["#3d1508", "#6b2814", "#953c24", "#b45a3b", "#c96442", "#d97a56", "#f5d8cb", "#fbeee5"]
+      },
+      "warm-chalk": {
+        "role": "neutral",
+        "displayName": "Warm Chalk",
+        "canonical": "#faf9f7",
+        "tonalRamp": ["#0d0c0a", "#1a1916", "#2a2825", "#46433c", "#74716b", "#989590", "#c9d0da", "#faf9f7"]
+      },
+      "charcoal-veil": {
+        "role": "neutral",
+        "displayName": "Charcoal Veil",
+        "canonical": "#1a1916",
+        "tonalRamp": ["#0d0c0a", "#1a1916", "#2a2825", "#46433c", "#74716b", "#989590", "#c9d0da", "#faf9f7"]
+      },
+      "warm-stone": {
+        "role": "neutral",
+        "displayName": "Warm Stone",
+        "canonical": "#74716b",
+        "tonalRamp": ["#0d0c0a", "#1a1916", "#2a2825", "#46433c", "#74716b", "#989590", "#c9d0da", "#faf9f7"]
+      },
+      "selection-blue": {
+        "role": "tertiary",
+        "displayName": "Selection Blue",
+        "canonical": "#2563eb",
+        "tonalRamp": ["#0f2070", "#1a3ba8", "#1d4ed8", "#2563eb", "#3b82f6", "#93c5fd", "#dbeafe", "#eff6ff"]
+      },
+      "status-green": {
+        "role": "tertiary",
+        "displayName": "Status Green",
+        "canonical": "#1f7a3a",
+        "tonalRamp": ["#0a2a14", "#0f4020", "#1a6030", "#1f7a3a", "#4caf72", "#86efac", "#c6ead2", "#e8f7ee"]
+      },
+      "status-red": {
+        "role": "tertiary",
+        "displayName": "Status Red",
+        "canonical": "#9c2a25",
+        "tonalRamp": ["#2a0a08", "#451714", "#7a2018", "#9c2a25", "#e06b65", "#fca5a5", "#f5c6c2", "#fdecea"]
+      },
+      "status-purple": {
+        "role": "tertiary",
+        "displayName": "Status Purple (AI)",
+        "canonical": "#6c3aa6",
+        "tonalRamp": ["#1a0a30", "#28144a", "#48207a", "#6c3aa6", "#a87dd4", "#d8b4fe", "#e4d4f1", "#f3ecf9"]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero headings and brand-identity moments only. Source Serif Pro stack. Maximum one per view."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Brand name in header, section landmarks using serif. Maximum two per screen."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Panel headers, modal titles, list group labels. System sans. The dominant heading level in product UI."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "All prose, descriptions, chat messages. System sans. 65-75ch line length in reading contexts."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Eyebrows, status pill text, group category markers. System sans. Uppercase with tracking for category use; sentence-case for action labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-xs",
+        "value": "0 1px 0 rgba(28, 27, 26, 0.04)",
+        "purpose": "Micro-separation for primary buttons (inset highlight). Barely perceptible; felt more than seen."
+      },
+      {
+        "name": "shadow-sm",
+        "value": "0 1px 2px rgba(28, 27, 26, 0.05), 0 1px 3px rgba(28, 27, 26, 0.04)",
+        "purpose": "Hero prompt card at rest. Gentle elevation above the surface."
+      },
+      {
+        "name": "shadow-md",
+        "value": "0 6px 24px rgba(28, 27, 26, 0.07), 0 2px 6px rgba(28, 27, 26, 0.04)",
+        "purpose": "Focused/interactive cards, popovers, elevated panels. Signals interactivity."
+      },
+      {
+        "name": "shadow-lg",
+        "value": "0 24px 60px rgba(28, 27, 26, 0.16), 0 8px 16px rgba(28, 27, 26, 0.07)",
+        "purpose": "Modals, dropdowns, floating menus. The highest structural layer."
+      }
+    ],
+    "motion": [
+      {
+        "name": "transition-standard",
+        "value": "120ms ease",
+        "purpose": "All interactive state changes: background, border-color, color, box-shadow. Consistent across every interactive element."
+      }
+    ],
+    "breakpoints": [
+      { "name": "hero-max", "value": "960px", "purpose": "Max width for the home hero centered column." },
+      { "name": "prompt-max", "value": "720px", "purpose": "Max width for the hero prompt input card." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The loudest affordance. Used for the single most important action per screen.",
+      "html": "<button class=\"ds-btn-primary\">Create Project</button>",
+      "css": ".ds-btn-primary { background: #c96442; color: #fff; border: 1px solid #c96442; border-radius: 8px; padding: 6px 12px; font-size: 13.5px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; cursor: pointer; box-shadow: 0 1px 0 rgba(180, 90, 59, 0.18) inset, 0 1px 0 rgba(28,27,26,0.04); transition: background 120ms ease, border-color 120ms ease; } .ds-btn-primary:hover { background: #b45a3b; border-color: #b45a3b; } .ds-btn-primary:focus-visible { outline: 2px solid #c96442; outline-offset: 2px; } .ds-btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Primary Ghost Button",
+      "kind": "button",
+      "refersTo": "button-primary-ghost",
+      "description": "Secondary accent action that shares a screen with Primary. Keeps Fired Clay color without the weight fill.",
+      "html": "<button class=\"ds-btn-primary-ghost\">View Details</button>",
+      "css": ".ds-btn-primary-ghost { background: #fff; color: #c96442; border: 1px solid #c96442; border-radius: 8px; padding: 6px 12px; font-size: 13.5px; font-weight: 500; font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; cursor: pointer; transition: background 120ms ease; } .ds-btn-primary-ghost:hover { background: #fbeee5; } .ds-btn-primary-ghost:focus-visible { outline: 2px solid #c96442; outline-offset: 2px; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Default secondary action. Blends into chrome; readable but not prominent.",
+      "html": "<button class=\"ds-btn-ghost\">Cancel</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #1a1916; border: 1px solid #e1e5eb; border-radius: 8px; padding: 6px 12px; font-size: 13.5px; font-weight: 400; font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; cursor: pointer; transition: background 120ms ease, border-color 120ms ease; } .ds-btn-ghost:hover { background: #eef1f5; border-color: #c9d0da; } .ds-btn-ghost:focus-visible { outline: 2px solid #c96442; outline-offset: 2px; }"
+    },
+    {
+      "name": "Subtle Button",
+      "kind": "button",
+      "refersTo": "button-subtle",
+      "description": "Quietest button. Used in dense toolbars and panels where multiple actions compete.",
+      "html": "<button class=\"ds-btn-subtle\">Settings</button>",
+      "css": ".ds-btn-subtle { background: #eef1f5; color: #1a1916; border: 1px solid transparent; border-radius: 8px; padding: 6px 12px; font-size: 13.5px; font-weight: 400; font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; cursor: pointer; transition: background 120ms ease; } .ds-btn-subtle:hover { background: #e4e8ef; } .ds-btn-subtle:focus-visible { outline: 2px solid #c96442; outline-offset: 2px; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input-default",
+      "description": "Standard form field. Intentionally neutral — never competes with the Primary button.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Project name</span><input class=\"ds-input\" type=\"text\" placeholder=\"My project\" /></label>",
+      "css": ".ds-field { display: grid; gap: 6px; font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; } .ds-field-label { font-size: 13px; font-weight: 600; color: #74716b; } .ds-input { font: inherit; font-size: 13.5px; color: #1a1916; background: #fff; border: 1px solid #e1e5eb; border-radius: 8px; padding: 7px 10px; width: 100%; transition: border-color 120ms ease, box-shadow 120ms ease; } .ds-input::placeholder { color: #b3b0a8; } .ds-input:focus { outline: none; border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16); }"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "description": "Semantic status indicator. Never decorative.",
+      "html": "<div class=\"ds-chips\"><span class=\"ds-chip ds-chip--green\">Connected</span><span class=\"ds-chip ds-chip--red\">Error</span><span class=\"ds-chip ds-chip--purple\">AI active</span></div>",
+      "css": ".ds-chips { display: inline-flex; gap: 8px; flex-wrap: wrap; } .ds-chip { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 600; font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; border: 1px solid; } .ds-chip--green { color: #1f7a3a; background: #e8f7ee; border-color: #c6ead2; } .ds-chip--red { color: #9c2a25; background: #fdecea; border-color: #f5c6c2; } .ds-chip--purple { color: #6c3aa6; background: #f3ecf9; border-color: #e4d4f1; }"
+    },
+    {
+      "name": "Panel / Card",
+      "kind": "card",
+      "description": "Standard content panel. Tonal step creates hierarchy; no shadow at rest.",
+      "html": "<div class=\"ds-panel\"><div class=\"ds-panel-header\">Recent Projects</div><div class=\"ds-panel-body\">Panel content goes here. The border and background step distinguish this from the app surface without a drop shadow.</div></div>",
+      "css": ".ds-panel { background: #fff; border: 1px solid #e1e5eb; border-radius: 12px; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; } .ds-panel-header { padding: 12px 16px; border-bottom: 1px solid #e1e5eb; font-size: 13.5px; font-weight: 600; color: #0d0c0a; background: #fff; } .ds-panel-body { padding: 16px; font-size: 13.5px; color: #1a1916; line-height: 1.5; }"
+    },
+    {
+      "name": "Navigation Rail Item",
+      "kind": "nav",
+      "description": "Icon-only rail navigation. 56px wide column, active state uses Fired Clay icon color only.",
+      "html": "<nav class=\"ds-rail\"><button class=\"ds-rail-item ds-rail-item--active\" aria-label=\"Home\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"/><polyline points=\"9 22 9 12 15 12 15 22\"/></svg></button><button class=\"ds-rail-item\" aria-label=\"Projects\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"3\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\"/></svg></button></nav>",
+      "css": ".ds-rail { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 56px; background: #fff; border-right: 1px solid #e1e5eb; padding: 8px 0; } .ds-rail-item { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; background: transparent; border: none; color: #74716b; cursor: pointer; transition: background 120ms ease, color 120ms ease; } .ds-rail-item:hover { background: #eef1f5; color: #1a1916; } .ds-rail-item--active { color: #c96442; } .ds-rail-item:focus-visible { outline: 2px solid #c96442; outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Open Studio",
+    "overview": "Open Design is a workspace where design thinking happens collectively, in the open, without discipline gatekeeping. The visual system reflects this: warm surfaces that feel like shared space, not cold software. Honest materials — no decorative grain, no manufactured depth, no chrome that performs capability before delivering it. The accent is a single fired clay that shows up only where action lives. Everything else earns its presence by being useful.\n\nThe palette is warm but not precious. Neutrals are bone and chalk rather than clinical white or tech-gray, creating the ambient warmth of a studio with good light rather than a dashboard at 2am. The serif headline moments (brand name, home hero) are the only typographic flourish, anchoring the product's identity without shouting. Body type is the system stack at 13.5px — compact, readable, tool-native.\n\nThis system explicitly rejects the aesthetic of interchangeable B2B SaaS: the purple-tinted off-whites, the rounded card grids, the flat neutral everything. It equally rejects the AI-hype aesthetic: no glowing gradients, no neon on dark, no decorative flourishes that signal made by machine. Capability is communicated through calm precision, not visual drama.",
+    "keyCharacteristics": [
+      "Single accent color (Fired Clay) on fewer than 10% of any surface",
+      "Warm-neutral surfaces in light mode; rich charcoal-brown in dark mode — never cold gray",
+      "Flat-by-default elevation; shadows appear only where UI is structurally lifted",
+      "Serif type reserved for brand and hero moments; UI chrome uses system sans",
+      "120ms transitions on all state changes; no choreography, no bounce",
+      "Dense, information-rich layout appropriate for a professional tool"
+    ],
+    "rules": [
+      {
+        "name": "The Fired Clay Rule",
+        "body": "The primary accent appears on fewer than 10% of any given screen. It belongs to CTAs, focus rings, and active indicators — not decoration, not background fills, not borders on cards. When everything is accent, nothing is action.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two-Blue Doctrine",
+        "body": "#2563eb (Selection Blue) and #c96442 (Fired Clay) are both active signals, but they serve different semantics. Fired Clay means do this. Selection Blue means this is selected. Never substitute one for the other.",
+        "section": "colors"
+      },
+      {
+        "name": "The Warm Neutral Rule",
+        "body": "No surface in this system is pure #000 or pure #fff. The warmth in the neutrals is what distinguishes the studio from a blank document.",
+        "section": "colors"
+      },
+      {
+        "name": "The Serif Reserve",
+        "body": "The serif is used in exactly two contexts: the brand name and the home hero headline. Product UI chrome uses system sans only.",
+        "section": "typography"
+      },
+      {
+        "name": "The Size Floor",
+        "body": "Nothing below 11px. Labels at 11px use weight 600 and tracking +0.04em to maintain legibility at that floor.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-by-Default Rule",
+        "body": "Surfaces are flat at rest. A panel on top of another panel does not get a shadow — it gets a border and a background step. Shadows appear only when UI is physically lifted: dropdowns, modals, flyouts, floating elements.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Structural-Only Rule",
+        "body": "Shadows are not decorative. No glow effects, no ambient light halos, no colored shadows. Shadow tint is always the near-black base — never the accent color.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use Fired Clay (#c96442) exclusively for primary CTAs, active indicators, and focus rings.",
+      "Do use tonal surface steps (Warm Chalk to Warm White to Cool Whisper) to create hierarchy before reaching for shadows or borders.",
+      "Do keep body copy at 13.5px / 1.5 line-height minimum.",
+      "Do use Selection Blue (#2563eb) for currently selected states so CTAs and selections can coexist.",
+      "Do restrict serif type (Source Serif Pro) to brand-identity and hero headline moments only.",
+      "Do treat shadows as structural signals, not atmospheric decoration.",
+      "Do warm every neutral slightly — no pure #000 or #fff anywhere.",
+      "Do use status colors with their matching bg/border pairs — never in isolation.",
+      "Do set prefers-reduced-motion overrides for all transitions and animations."
+    ],
+    "donts": [
+      "Don't use a muted purple or blue-gray as the primary accent. Generic SaaS cream is explicitly what this system is not.",
+      "Don't use gradient text, glassmorphism, glowing halos, neon-on-dark, or purple gradients.",
+      "Don't add shadows to resting panels or cards. Use a border and a tonal background step instead.",
+      "Don't use Fired Clay as a background fill for non-interactive surfaces, decorative borders, or section separators.",
+      "Don't use border-left or border-right as a colored accent stripe on cards, list items, or callouts. Never.",
+      "Don't let the serif type escape its reserved zones.",
+      "Don't use identical card grids as the primary layout pattern.",
+      "Don't confuse Selection Blue (#2563eb) with Fired Clay (#c96442). They are semantically distinct."
+    ]
+  }
+}
