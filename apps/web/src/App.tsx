@@ -23,9 +23,7 @@ import {
   type SettingsSection,
 } from './components/SettingsDialog';
 import { PrivacyConsentModal } from './components/PrivacyConsentModal';
-import { LoginPage } from './components/LoginPage';
-import { SignupPage } from './components/SignupPage';
-import { AuthProvider, useAuth } from './providers/auth';
+import { AuthProvider } from './providers/auth';
 import {
   daemonIsLive,
   fetchAppVersionInfo,
@@ -168,6 +166,10 @@ export function App() {
 }
 
 function AuthenticatedApp() {
+  return <AppShell />;
+}
+
+function AppShell() {
   const { t } = useI18n();
   const clientType = useMemo(() => detectClientType(), []);
   const [config, setConfig] = useState<AppConfig>(() => loadConfig());
@@ -230,29 +232,6 @@ function AuthenticatedApp() {
   const [composioConfigLoading, setComposioConfigLoading] = useState(true);
   const route = useRoute();
   const analytics = useAnalytics();
-  const auth = useAuth();
-
-  useEffect(() => {
-    if (!auth.configured || auth.loading || auth.user || route.kind === 'login' || route.kind === 'signup') {
-      return;
-    }
-    navigate({ kind: 'login' }, { replace: true });
-  }, [auth.configured, auth.loading, auth.user, route.kind]);
-
-  useEffect(() => {
-    if (!auth.configured || auth.loading || !auth.user) return;
-    if (route.kind === 'login' || route.kind === 'signup') {
-      navigate({ kind: 'home', view: 'home' }, { replace: true });
-    }
-  }, [auth.configured, auth.loading, auth.user, route.kind]);
-
-  if (auth.configured && auth.loading) {
-    return <div className="od-loading-shell">Loading Open Design...</div>;
-  }
-
-  if (auth.configured && !auth.user) {
-    return route.kind === 'signup' ? <SignupPage /> : <LoginPage />;
-  }
 
   // app_launch — fired exactly once per page load. Mounting in App, not the
   // RootLayout, so we capture after the first React tick and the analytics
