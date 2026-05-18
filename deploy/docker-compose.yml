@@ -9,7 +9,7 @@ services:
     restart: always
     environment:
       NODE_ENV: production
-      NODE_OPTIONS: ${NODE_OPTIONS:---max-old-space-size=192}
+      NODE_OPTIONS: ${NODE_OPTIONS:---max-old-space-size=4028}
       OD_BIND_HOST: 0.0.0.0
       OD_ALLOWED_ORIGINS: ${SERVICE_URL_OPEN_DESIGN:-}
       OD_PORT: 7456
