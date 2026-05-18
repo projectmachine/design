@@ -181,13 +181,14 @@ export async function startServer(options: StartServerOptions = {}): Promise<str
 
   const dbConfig = resolveDaemonDbConfig(process.env);
   const auth = createSupabaseAuthContext(dbConfig);
-  if (auth) app.use('/api', auth.requireAuth);
 
   app.get('/api/health', (_req, res) => res.json({ ok: true }));
   app.get('/api/version', asyncRoute(async (_req, res) => {
     res.json(await readCurrentAppVersionInfo());
   }));
   app.get('/api/daemon/status', (_req, res) => res.json({ ok: true, mode: 'web-only' }));
+  if (auth) app.use('/api', auth.requireAuth);
+
   app.get('/api/daemon/db', (_req, res) => res.json({ kind: dbConfig.kind }));
   app.get('/api/app-config', asyncRoute(async (_req, res) => {
     res.json({ config: await readAppConfig(runtimeDataDir) });
